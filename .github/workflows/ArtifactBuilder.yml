@@ -1,0 +1,102 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Artifact Builder
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# This is a basic workflow to help you get started with Action
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  mac_build:
+    # The type of runner that the job will run on
+    runs-on: macos-latest 
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: Directory
+      run: pwd
+    - name: Files
+      run: ls -a
+
+    # Runs a set of commands using the runners shell
+    - name: Xcode Build
+      run: xcodebuild -project VCAT-Audio-Core/Builds/MacOSX/VCAT-Audio-Core.xcodeproj
+    
+    - name: Print Build output
+      run: ls -R VCAT-Audio-Core/Builds  
+    
+    
+    - name: Copy app
+      run: |
+        mkdir Mac,
+        cp -rf VCAT-Audio-Core/Builds/MacOSX/build/Debug/ Mac
+    
+    - name: Check folders
+      run: ls
+      
+    - name: Check app copied
+      run: ls Mac
+        
+    - name: Download zip using homebrew
+      run: brew install zip
+      
+    - name: Zip build
+      run:  zip -r release.zip Mac
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: VCAT-Audio-Core-Mac
+        # Directory containing files to upload
+        path: release.zip
+        
+        
+  windows_build:
+    runs-on: windows-latest 
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    # Runs a single command using the runners shell
+    - name: Directory
+      run: pwd
+      
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+      
+    - name: VStudio Build
+      run: msbuild VCAT-Audio-Core/Builds/VisualStudio2019/VCAT-Audio-Core.sln
+    
+    - name: Make App Folder
+      run:  mkdir TestProjectWindows
+    
+    - name: Copy build files
+      run: cp -r VCAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ VCAT-Audio-Core  
+    
+    - name: Check copy
+      run: ls VCAT-Audio-Core/
+      
+    - name: zip 
+      run: 7z a VCAT-Audio-Core
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: VCAT-Audio-Core-Windows
+        # Directory containing files to upload
+        path: VCAT-Audio-Core
