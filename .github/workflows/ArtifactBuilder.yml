@@ -36,13 +36,13 @@ jobs:
       run: xcodebuild -project VCAT-Audio-Core/Builds/MacOSX/VCAT-Audio-Core.xcodeproj
     
     - name: Print Build output
-      run: ls -R VCAT-Audio-Core/Builds/Builds  
+      run: ls -R VCAT-Audio-Core/Builds/  
     
     
     - name: Copy app
       run: |
         mkdir Mac,
-        cp -rf VCAT-Audio-Core/Builds/Builds/MacOSX/build/Debug/ Mac
+        cp -rf VCAT-Audio-Core/Builds/MacOSX/build/Debug/ Mac
     
     - name: Check folders
       run: ls
@@ -87,7 +87,7 @@ jobs:
       run:  mkdir Windows
     
     - name: Copy build files
-      run: cp -r CAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ Windows  
+      run: cp -r VCAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ Windows  
     
     - name: Check copy
       run: ls Windows/
@@ -101,6 +101,6 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: VCAT-Audio-Core-Mac
+        name: VCAT-Audio-Core-Windows
         # Directory containing files to upload
         path: release.7z
