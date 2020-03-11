@@ -27,16 +27,16 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Xcode Build
-      run: xcodebuild -project TestProject/Builds/MacOSX/TestProject.xcodeproj
+      run: xcodebuild -project VCAT-Audio-Core/Builds/MacOSX/VCAT-Audio-Core.xcodeproj
     
     - name: Print Build output
-      run: ls -R TestProject/Builds  
+      run: ls -R VCAT-Audio-Core/Builds/Builds  
     
     
     - name: Copy app
       run: |
         mkdir Mac,
-        cp -rf TestProject/Builds/MacOSX/build/Debug/ Mac
+        cp -rf VCAT-Audio-Core/Builds/Builds/MacOSX/build/Debug/ Mac
     
     - name: Check folders
       run: ls
@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: TestProject-Mac
+        name: VCAT-Audio-Core-Mac
         # Directory containing files to upload
         path: release.zip
         
@@ -75,19 +75,19 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.0
       
     - name: VStudio Build
-      run: msbuild TestProject/Builds/VisualStudio2019/TestProject.sln
+      run: msbuild VCAT-Audio-Core/Builds/VisualStudio2019/VCAT-Audio-Core.sln
     
     - name: Make App Folder
-      run:  mkdir TestProjectBuild
+      run:  mkdir Windows
     
     - name: Copy build files
-      run: cp -r TestProject/Builds/VisualStudio2019/x64/Debug/App/ TestProjectBuild  
+      run: cp -r CAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ Windows  
     
     - name: Check copy
-      run: ls TestProjectBuild/
+      run: ls Windows/
       
     - name: zip 
-      run: 7z a  TestProjectWindows TestProjectBuild
+      run: 7z a  release Windows
     - name: Print Contents
       run: ls
       
@@ -95,6 +95,6 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: TestProject-Windows
+        name: VCAT-Audio-Core-Mac
         # Directory containing files to upload
-        path: TestProjectWindows.7z
+        path: release.7z
