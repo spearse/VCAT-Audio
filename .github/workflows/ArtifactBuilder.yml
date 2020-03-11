@@ -83,20 +83,21 @@ jobs:
       run: msbuild VCAT-Audio-Core/Builds/VisualStudio2019/VCAT-Audio-Core.sln
     
     - name: Make App Folder
-      run:  mkdir TestProjectWindows
+      run:  mkdir VCAT-Audio-Core-Build
     
     - name: Copy build files
-      run: cp -r VCAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ VCAT-Audio-Core  
+      run: cp -r VCAT-Audio-Core/Builds/VisualStudio2019/x64/Debug/App/ VCAT-Audio-Core-Build
     
     - name: Check copy
-      run: ls VCAT-Audio-Core/
+      run: ls VCAT-Audio-Core-Build
       
     - name: zip 
       run: 7z a VCAT-Audio-Core
+      
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
         name: VCAT-Audio-Core-Windows
         # Directory containing files to upload
-        path: VCAT-Audio-Core
+        path: VCAT-Audio-Core.7z
