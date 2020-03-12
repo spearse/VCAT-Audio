@@ -69,7 +69,7 @@ namespace
             if (! output.writeString (value))
                 return false;
 
-            const size_t numPaddingZeros = ~value.getNumBytesAsUTF8() & 3;
+            const size_t numPaddingZeros = ~value.length() & 3;
 
             return output.writeRepeatedByte ('\0', numPaddingZeros);
         }
@@ -332,7 +332,6 @@ bool OSCSender::send (const OSCBundle& bundle)      { return pimpl->send (bundle
 bool OSCSender::sendToIPAddress (const String& host, int port, const OSCMessage& message) { return pimpl->send (message, host, port); }
 bool OSCSender::sendToIPAddress (const String& host, int port, const OSCBundle& bundle)   { return pimpl->send (bundle,  host, port); }
 
-
 //==============================================================================
 //==============================================================================
 #if JUCE_UNIT_TESTS
@@ -340,9 +339,7 @@ bool OSCSender::sendToIPAddress (const String& host, int port, const OSCBundle& 
 class OSCBinaryWriterTests  : public UnitTest
 {
 public:
-    OSCBinaryWriterTests()
-        : UnitTest ("OSCBinaryWriter class", UnitTestCategories::osc)
-    {}
+    OSCBinaryWriterTests() : UnitTest ("OSCBinaryWriter class", "OSC") {}
 
     void runTest()
     {
@@ -669,9 +666,7 @@ static OSCBinaryWriterTests OSCBinaryWriterUnitTests;
 class OSCRoundTripTests  : public UnitTest
 {
 public:
-    OSCRoundTripTests()
-        : UnitTest ("OSCRoundTripTests class", UnitTestCategories::osc)
-    {}
+    OSCRoundTripTests() : UnitTest ("OSCRoundTripTests class", "OSC") {}
 
     void runTest()
     {
@@ -872,6 +867,7 @@ public:
 
 static OSCRoundTripTests OSCRoundTripUnitTests;
 
-#endif
+//==============================================================================
+#endif // JUCE_UNIT_TESTS
 
 } // namespace juce

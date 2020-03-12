@@ -1,0 +1,6 @@
+#N canvas 261 -872 952 542 10;
+#X obj 111 190 sendOSC;
+#X msg 49 99 connect 127.0.0.1 8080;
+#X msg 260 144 send /setup 127.0.0.1 8080;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;

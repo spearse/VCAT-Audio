@@ -29,10 +29,6 @@
 			isa = PBXBuildFile;
 			fileRef = FB6FFFEE07D792845AADE223;
 		};
-		B1B61FECC8769DC2878EA1B4 = {
-			isa = PBXBuildFile;
-			fileRef = 829A9BCB0EA1A6484121CF23;
-		};
 		4A36B6D0CD7030A9A9B5C1F0 = {
 			isa = PBXBuildFile;
 			fileRef = 355814B8251E62B9BB28E00F;
@@ -60,6 +56,10 @@
 		A7BC57C84517B3A6965FF2C4 = {
 			isa = PBXBuildFile;
 			fileRef = A573E07607E4B29365C1551D;
+		};
+		58DDBD980E3F896083677035 = {
+			isa = PBXBuildFile;
+			fileRef = 99DB92427DE0AFE6E99AA087;
 		};
 		85AF6E803B92747B38FC936D = {
 			isa = PBXBuildFile;
@@ -279,11 +279,25 @@
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
 		};
+		7D856E9CDE7550C255B34859 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "VCAT-OSC-Core.h";
+			path = "../../Source/VCAT-OSC-Core.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		7F401B685F0EB015A7DE7108 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_devices.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		815C0102942CD28FD7D38866 = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			name = "VCAT-Audio-Core.entitlements";
+			path = "VCAT-Audio-Core.entitlements";
 			sourceTree = "SOURCE_ROOT";
 		};
 		81BA4DFAECF009E74D08C17E = {
@@ -292,13 +306,6 @@
 			name = Main.cpp;
 			path = ../../Source/Main.cpp;
 			sourceTree = "SOURCE_ROOT";
-		};
-		829A9BCB0EA1A6484121CF23 = {
-			isa = PBXFileReference;
-			lastKnownFileType = wrapper.framework;
-			name = CoreAudioKit.framework;
-			path = System/Library/Frameworks/CoreAudioKit.framework;
-			sourceTree = SDKROOT;
 		};
 		8820B0A15532D89AEF98008E = {
 			isa = PBXFileReference;
@@ -327,6 +334,13 @@
 			name = Cocoa.framework;
 			path = System/Library/Frameworks/Cocoa.framework;
 			sourceTree = SDKROOT;
+		};
+		99DB92427DE0AFE6E99AA087 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "VCAT-OSC-Core.cpp";
+			path = "../../Source/VCAT-OSC-Core.cpp";
+			sourceTree = "SOURCE_ROOT";
 		};
 		9D3D2479586B469127D161AA = {
 			isa = PBXFileReference;
@@ -464,6 +478,8 @@
 		02EC074DC2EEEE197D3C369C = {
 			isa = PBXGroup;
 			children = (
+				99DB92427DE0AFE6E99AA087,
+				7D856E9CDE7550C255B34859,
 				52C11FF390908C043BA42996,
 				C594A8FBF7E9C7F28E14A792,
 				81BA4DFAECF009E74D08C17E,
@@ -540,7 +556,6 @@
 				9D3D2479586B469127D161AA,
 				9733681A708FF08BBC75D906,
 				FB6FFFEE07D792845AADE223,
-				829A9BCB0EA1A6484121CF23,
 				355814B8251E62B9BB28E00F,
 				CC80DE9AAA64B0330CA113E0,
 				59DF2031566B9F491B19DFDB,
@@ -702,7 +717,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "VCAT-Audio-Core";
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
@@ -748,7 +762,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = "VCAT-Audio-Core";
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-Wreorder";
 				ZERO_LINK = NO;
 			};
@@ -788,6 +801,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DDBD980E3F896083677035,
 				85AF6E803B92747B38FC936D,
 				1E4BE8E31097B4AB26908C79,
 				634480809151A91997D6979B,
@@ -816,7 +830,6 @@
 				CD7F15FFE100E480777289ED,
 				30AC2FD2E698D0B27DE595A4,
 				253E948AB7B06AFB37CC7299,
-				B1B61FECC8769DC2878EA1B4,
 				4A36B6D0CD7030A9A9B5C1F0,
 				B71B88116725016C1D844282,
 				89A56522CBA6938957F35C92,

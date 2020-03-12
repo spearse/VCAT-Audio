@@ -7,12 +7,17 @@
 */
 
 #include "MainComponent.h"
+#include "VCAT-OSC-Core.h"
 
 //==============================================================================
 MainComponent::MainComponent()
 {
-    // Make sure you set the size of the component after
-    // you add any child components.
+    m_logger.setText("Received OSC Messages will appear here");
+    m_logger.setMultiLine(true);
+    m_logger.setReadOnly(true);
+    
+    addAndMakeVisible(m_logger);
+    
     setSize (800, 600);
 
     // Some platforms require permissions to open input channels so request that here
@@ -27,13 +32,82 @@ MainComponent::MainComponent()
         // Specify the number of input and output channels that we want to open
         setAudioChannels (2, 2);
     }
+    
+    
+    
+    VCAT::OSCNodePtr setupNode  = std::make_shared<VCAT::OSCNode>("/setup",[](const OSCMessage& msg ){
+            
+        DBG("Setup Received");
+        
+        
+        bool valid = false;
+        String error="NOTKNOWN";
+        
+        
+        
+        String ip = VCAT::obtainString(msg, 0);
+        int port = VCAT::obtainInt(msg, 1);
+        
+        //maybe show something on screen with warning...
+        VCAT::OSCCore::getInstance()->setupSender(ip, port);
+        
+        valid = VCAT::OSCCore::getInstance()->setup();
+    
+        VCAT::OSCCore::getInstance()->finished("/setup",valid ,error);
+        
+        
+        
+    });
+        
+    
+    
+    VCAT::OSCCore::getInstance()->registerNode(setupNode);
+    
+    
+    
+    VCAT::OSCCore::getInstance()->setLogCallback([this](const OSCMessage& msg){
+        logOSCMessage(msg);
+    });
+    
 }
 
 MainComponent::~MainComponent()
 {
     // This shuts down the audio device and clears the audio source.
     shutdownAudio();
+    
+    VCAT::OSCCore::deleteInstance();
+    
 }
+
+
+
+void MainComponent::logLine(String msg){
+    MessageManagerLock lock();
+    String text = m_logger.getTextValue().toString();
+    text +=  String("\n") + msg;
+    m_logger.setText(text);
+    m_logger.setScrollToShowCursor(true);
+    m_logger.setCaretVisible(true);
+    
+    m_logger.setCaretPosition(m_logger.getText().length() - 1);
+    
+}
+void MainComponent::logOSCMessage(const OSCMessage& msg){
+    
+    logLine( VCAT::obtainMessageAsString(msg)  );
+    
+    
+}
+
+
+
+
+
+
+
+
+
 
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
@@ -80,4 +154,10 @@ void MainComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
+    
+    auto size = getLocalBounds();
+    
+    m_logger.setBounds(size.removeFromBottom(size.getHeight()*0.5).reduced(5));
+    
+    
 }

@@ -57,12 +57,12 @@ Time OSCTimeTag::toTime() const noexcept
     const uint64 seconds = rawTimeTag >> 32;
     const uint32 fractionalPart = (rawTimeTag & 0x00000000FFFFFFFFULL);
 
-    const auto fractionalPartInMillis = (double) fractionalPart / 4294967.296;
+    const double fractionalPartInMillis = (double) fractionalPart / 4294967.296;
 
     // now using signed integer, because this is allowed to become negative:
-    const auto juceTimeInMillis = (int64) (seconds * 1000)
-                                + (int64) roundToInt (fractionalPartInMillis)
-                                - (int64) millisecondsBetweenOscAndJuceEpochs;
+    const int64 juceTimeInMillis = int64 ((seconds * 1000)
+                                           + (uint64) roundToInt(fractionalPartInMillis)
+                                           - millisecondsBetweenOscAndJuceEpochs);
 
     return Time (juceTimeInMillis);
 }
@@ -80,9 +80,7 @@ bool OSCTimeTag::isImmediately() const noexcept
 class OSCTimeTagTests  : public UnitTest
 {
 public:
-    OSCTimeTagTests()
-        : UnitTest ("OSCTimeTag class", UnitTestCategories::osc)
-    {}
+    OSCTimeTagTests() : UnitTest ("OSCTimeTag class", "OSC") {}
 
     void runTest()
     {

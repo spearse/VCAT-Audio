@@ -394,7 +394,6 @@ String OSCAddressPattern::toString() const noexcept
     return asString;
 }
 
-
 //==============================================================================
 //==============================================================================
 #if JUCE_UNIT_TESTS
@@ -402,9 +401,7 @@ String OSCAddressPattern::toString() const noexcept
 class OSCAddressTests : public UnitTest
 {
 public:
-    OSCAddressTests()
-        : UnitTest ("OSCAddress class", UnitTestCategories::osc)
-    {}
+    OSCAddressTests() : UnitTest ("OSCAddress class", "OSC") {}
 
     void runTest()
     {
@@ -448,9 +445,7 @@ static OSCAddressTests OSCAddressUnitTests;
 class OSCAddressPatternTests  : public UnitTest
 {
 public:
-    OSCAddressPatternTests()
-        : UnitTest ("OSCAddressPattern class", UnitTestCategories::osc)
-    {}
+    OSCAddressPatternTests() : UnitTest ("OSCAddressPattern class", "OSC") {}
 
     void runTest()
     {
@@ -589,9 +584,7 @@ static OSCAddressPatternTests OSCAddressPatternUnitTests;
 class OSCPatternMatcherTests : public UnitTest
 {
 public:
-    OSCPatternMatcherTests()
-        : UnitTest ("OSCAddress class / pattern matching", UnitTestCategories::osc)
-    {}
+    OSCPatternMatcherTests() : UnitTest ("OSCAddress class / pattern matching", "OSC") {}
 
     void runTest()
     {
@@ -787,6 +780,6 @@ public:
 
 static OSCPatternMatcherTests OSCPatternMatcherUnitTests;
 
-#endif
+#endif // JUCE_UNIT_TESTS
 
 } // namespace juce

@@ -99,22 +99,12 @@ public:
     /** Returns a pointer to the first OSCArgument in the OSCMessage object.
         This method is provided for compatibility with standard C++ iteration mechanisms.
     */
-    OSCArgument* begin() noexcept;
-
-    /** Returns a pointer to the first OSCArgument in the OSCMessage object.
-        This method is provided for compatibility with standard C++ iteration mechanisms.
-    */
-    const OSCArgument* begin() const noexcept;
+    OSCArgument* begin() const noexcept;
 
     /** Returns a pointer to the last OSCArgument in the OSCMessage object.
         This method is provided for compatibility with standard C++ iteration mechanisms.
     */
-    OSCArgument* end() noexcept;
-
-    /** Returns a pointer to the last OSCArgument in the OSCMessage object.
-        This method is provided for compatibility with standard C++ iteration mechanisms.
-    */
-    const OSCArgument* end() const noexcept;
+    OSCArgument* end() const noexcept;
 
     /** Removes all arguments from the OSCMessage. */
     void clear();

@@ -64,7 +64,7 @@ public:
 
         An OSCBundle Element contains either one OSCMessage or one OSCBundle.
      */
-    class JUCE_API  Element
+    class Element
     {
     public:
         //==============================================================================
@@ -127,16 +127,10 @@ public:
     void addElement (const OSCBundle::Element& element)          { elements.add (element); }
 
     /** Returns a pointer to the first element of the OSCBundle. */
-    OSCBundle::Element* begin() noexcept                         { return elements.begin(); }
-
-    /** Returns a pointer to the first element of the OSCBundle. */
-    const OSCBundle::Element* begin() const noexcept             { return elements.begin(); }
+    OSCBundle::Element* begin() const noexcept                   { return elements.begin(); }
 
     /** Returns a pointer past the last element of the OSCBundle. */
-    OSCBundle::Element* end() noexcept                           { return elements.end(); }
-
-    /** Returns a pointer past the last element of the OSCBundle. */
-    const OSCBundle::Element* end() const noexcept               { return elements.end(); }
+    OSCBundle::Element* end() const noexcept                     { return elements.end(); }
 
 private:
     //==============================================================================

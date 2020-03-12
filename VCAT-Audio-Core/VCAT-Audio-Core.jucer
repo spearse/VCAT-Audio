@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="WpZpHH" name="VCAT-Audio-Core" projectType="guiapp" jucerVersion="5.4.7">
+<JUCERPROJECT id="WpZpHH" name="VCAT-Audio-Core" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="yeneEV" name="VCAT-Audio-Core">
     <GROUP id="{425BA024-4696-AE79-27A8-173FED48A41D}" name="Source">
+      <FILE id="TMkxyr" name="VCAT-OSC-Core.cpp" compile="1" resource="0"
+            file="Source/VCAT-OSC-Core.cpp"/>
+      <FILE id="XZisDk" name="VCAT-OSC-Core.h" compile="0" resource="0" file="Source/VCAT-OSC-Core.h"/>
       <FILE id="Cu1638" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="SVqAcf" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
@@ -95,6 +98,7 @@
   </MODULES>
   <LIVE_SETTINGS>
     <WINDOWS/>
+    <OSX/>
   </LIVE_SETTINGS>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
 </JUCERPROJECT>

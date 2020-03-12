@@ -31,10 +31,12 @@ public:
     void paint (Graphics& g) override;
     void resized() override;
 
+    void logOSCMessage(const OSCMessage& msg);
+    void logLine(String msg);
 private:
     //==============================================================================
     // Your private member variables go here...
-
+    TextEditor m_logger;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

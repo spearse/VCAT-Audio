@@ -51,7 +51,7 @@ public:
             setBounds (bounds);
 
         toFront (true);
-        setOpaque (true);
+        setOpaque (! bounds.isEmpty());
 
         controller = [[CABTMIDICentralViewController alloc] init];
         nativeSelectorComponent.setView ([controller view]);
@@ -61,7 +61,7 @@ public:
         enterModalState (true, exitCallback.release(), true);
     }
 
-    ~BluetoothMidiSelectorOverlay() override
+    ~BluetoothMidiSelectorOverlay()
     {
         nativeSelectorComponent.setView (nullptr);
         [controller release];
@@ -126,7 +126,7 @@ bool BluetoothMidiDevicePairingDialogue::open (ModalComponentManager::Callback* 
 
 bool BluetoothMidiDevicePairingDialogue::isAvailable()
 {
-    return NSClassFromString (@"CABTMIDICentralViewController") != nil;
+    return NSClassFromString ([NSString stringWithUTF8String: "CABTMIDICentralViewController"]) != nil;
 }
 
 } // namespace juce

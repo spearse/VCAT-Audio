@@ -63,22 +63,12 @@ const OSCArgument& OSCMessage::operator[] (const int i) const noexcept
     return arguments.getReference (i);
 }
 
-OSCArgument* OSCMessage::begin() noexcept
+OSCArgument* OSCMessage::begin() const noexcept
 {
     return arguments.begin();
 }
 
-const OSCArgument* OSCMessage::begin() const noexcept
-{
-    return arguments.begin();
-}
-
-OSCArgument* OSCMessage::end() noexcept
-{
-    return arguments.end();
-}
-
-const OSCArgument* OSCMessage::end() const noexcept
+OSCArgument* OSCMessage::end() const noexcept
 {
     return arguments.end();
 }
@@ -96,7 +86,6 @@ void OSCMessage::addBlob (MemoryBlock blob)         { arguments.add (OSCArgument
 void OSCMessage::addColour (OSCColour colour)       { arguments.add (OSCArgument (colour)); }
 void OSCMessage::addArgument (OSCArgument arg)      { arguments.add (arg); }
 
-
 //==============================================================================
 //==============================================================================
 #if JUCE_UNIT_TESTS
@@ -104,9 +93,7 @@ void OSCMessage::addArgument (OSCArgument arg)      { arguments.add (arg); }
 class OSCMessageTests  : public UnitTest
 {
 public:
-    OSCMessageTests()
-        : UnitTest ("OSCMessage class", UnitTestCategories::osc)
-    {}
+    OSCMessageTests() : UnitTest ("OSCMessage class", "OSC") {}
 
     void runTest()
     {
@@ -223,6 +210,6 @@ public:
 
 static OSCMessageTests OSCMessageUnitTests;
 
-#endif
+#endif // JUCE_UNIT_TESTS
 
 } // namespace juce
