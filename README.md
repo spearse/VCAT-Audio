@@ -25,3 +25,4 @@ Set Selected MIDI | /selectmidi | midi/filename(string) | [ ] | Sets the selecte
 Each command will return a standard response using the path **/response** unless explicitly stated above.  This response will provide an *integer* representing whether the command was successful, the *name* of the command it is responding to (as a string) followed by another string containing an error/wargning message.  If there was no error this string will be null.
 
 
+### Planned Development.
